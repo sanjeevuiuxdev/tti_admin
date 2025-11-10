@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/auth/ProtectedRoute.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1762268842600,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1762268842600,
+            "name": "Commit-0",
+            "content": "import { Navigate } from \"react-router-dom\";\nimport { useAuth } from \"./AuthContext\";\n\nexport default function ProtectedRoute({ children }) {\n  const { user, ready } = useAuth();\n  if (!ready) return null;\n  if (!user) return <Navigate to=\"/login\" replace />;\n  return children;\n}\n"
+        }
+    ]
+}

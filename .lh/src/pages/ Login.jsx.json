@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/pages/ Login.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1762268879597,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1762269617151,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,46 @@\n+import { useState } from \"react\";\n+import { useAuth } from \"../auth/AuthContext\";\n+\n+export default function Login() {\n+  const { loginSuccess } = useAuth();\n+  const [username, setU] = useState(\"\");\n+  const [password, setP] = useState(\"\");\n+  const [loading, setL] = useState(false);\n+  const [err, setErr] = useState(\"\");\n+\n+  async function submit(e) {\n+    e.preventDefault();\n+    setErr(\"\");\n+    if (!username || !password) { setErr(\"Both fields required\"); return; }\n+    try {\n+      setL(true);\n+      const res = await fetch(`${import.meta.env.VITE_API_BASE}/api/auth/login`, {\n+        method: \"POST\",\n+        headers: { \"Content-Type\": \"application/json\" },\n+        body: JSON.stringify({ username, password }),\n+      });\n+      if (!res.ok) throw new Error((await res.json().catch(()=>({})))?.message || \"Login failed\");\n+      const data = await res.json();\n+      loginSuccess(data);\n+      window.location.href = \"/\";\n+    } catch (e) {\n+      setErr(e.message || \"Login failed\");\n+    } finally {\n+      setL(false);\n+    }\n+  }\n+\n+  return (\n+    <div style={{minHeight:\"100vh\",display:\"grid\",placeItems:\"center\"}}>\n+      <form onSubmit={submit} style={{width:380,background:\"#fff\",padding:16,borderRadius:10,border:\"1px solid #eee\",display:\"grid\",gap:10}}>\n+        <h2>Admin Login</h2>\n+        {err && <div style={{background:\"#ffecec\",color:\"#b10000\",padding:8,borderRadius:8}}>{err}</div>}\n+        <input placeholder=\"Username\" value={username} onChange={e=>setU(e.target.value)} />\n+        <input placeholder=\"Password\" type=\"password\" value={password} onChange={e=>setP(e.target.value)} />\n+        <button disabled={loading} style={{background:\"#111\",color:\"#fff\",padding:10,borderRadius:8}}>\n+          {loading ? \"...\" : \"Sign in\"}\n+        </button>\n+      </form>\n+    </div>\n+  );\n+}\n"
+                }
+            ],
+            "date": 1762268879597,
+            "name": "Commit-0",
+            "content": "import { useState } from \"react\";\nimport { api } from \"../api/client\";\nimport { useAuth } from \"../auth/AuthContext\";\n\nexport default function Login() {\n  const { loginSuccess } = useAuth();\n  const [username, setU] = useState(\"\");\n  const [password, setP] = useState(\"\");\n  const [loading, setL] = useState(false);\n  const [err, setErr] = useState(\"\");\n\n  async function submit(e) {\n    e.preventDefault();\n    setErr(\"\");\n    if (!username || !password) return setErr(\"Both fields required\");\n    try {\n      setL(true);\n      const { data } = await api.post(\"/api/auth/login\", { username, password });\n      loginSuccess(data);\n      window.location.href = \"/\";\n    } catch (e) {\n      setErr(e?.response?.data?.message || \"Login failed\");\n    } finally {\n      setL(false);\n    }\n  }\n\n  return (\n    <div className=\"container\">\n      <form onSubmit={submit} className=\"card\">\n        <h2>Admin Login</h2>\n        {err && <div className=\"error\">{err}</div>}\n        <input placeholder=\"Username\" value={username} onChange={e=>setU(e.target.value)} />\n        <input placeholder=\"Password\" type=\"password\" value={password} onChange={e=>setP(e.target.value)} />\n        <button disabled={loading}>{loading ? \"...\" : \"Sign in\"}</button>\n      </form>\n    </div>\n  );\n}\n"
+        }
+    ]
+}

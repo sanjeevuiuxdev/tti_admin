@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/index.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1762268972628,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1762633145482,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n .error { background:#ffecec; color:#b10000; padding:8px; border-radius:8px; }\n .topbar { background:#111; color:#fff; display:flex; justify-content:space-between; align-items:center; padding:10px 16px; }\n .topbar a { color:#ddd; margin-right:12px; text-decoration:none; }\n .topbar a.active { color:#fff; font-weight:600; }\n-.page { padding:16px; max-width:1000px; margin:0 auto; }\n+.page { padding:16px; max-width:1300px; margin:0 auto; }\n .row { display:flex; justify-content:space-between; align-items:center; }\n .table { width:100%; border-collapse:collapse; background:#fff; border:1px solid #eee; border-radius:10px; overflow:hidden; }\n .table th, .table td { padding:10px; border-bottom:1px solid #f0f0f0; }\n .btn { background:#111; color:#fff; padding:8px 12px; border-radius:8px; text-decoration:none; }\n"
+                }
+            ],
+            "date": 1762268972628,
+            "name": "Commit-0",
+            "content": "body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background:#f7f7f7; }\n.container { min-height:100vh; display:grid; place-items:center; }\n.card { background:#fff; padding:16px; border:1px solid #eee; border-radius:10px; display:grid; gap:10px; width:min(480px, 92vw); }\n.error { background:#ffecec; color:#b10000; padding:8px; border-radius:8px; }\n.topbar { background:#111; color:#fff; display:flex; justify-content:space-between; align-items:center; padding:10px 16px; }\n.topbar a { color:#ddd; margin-right:12px; text-decoration:none; }\n.topbar a.active { color:#fff; font-weight:600; }\n.page { padding:16px; max-width:1000px; margin:0 auto; }\n.row { display:flex; justify-content:space-between; align-items:center; }\n.table { width:100%; border-collapse:collapse; background:#fff; border:1px solid #eee; border-radius:10px; overflow:hidden; }\n.table th, .table td { padding:10px; border-bottom:1px solid #f0f0f0; }\n.btn { background:#111; color:#fff; padding:8px 12px; border-radius:8px; text-decoration:none; }\ninput, select, button { padding:10px; border:1px solid #ddd; border-radius:8px; }\nbutton { background:#111; color:#fff; cursor:pointer; }\n"
+        }
+    ]
+}

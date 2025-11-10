@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/components/Topbar.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1762268888596,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1762276263072,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,17 +1,18 @@\n-import { Link, useLocation } from \"react-router-dom\";\n+// src/components/Topbar.jsx\n+import { Link } from \"react-router-dom\";\n import { useAuth } from \"../auth/AuthContext\";\n \n export default function Topbar() {\n   const { logout } = useAuth();\n-  const { pathname } = useLocation();\n   return (\n-    <div className=\"topbar\">\n-      <div className=\"left\">\n-        <Link to=\"/\">Dashboard</Link>\n-        <Link className={pathname.startsWith(\"/categories\")?\"active\":\"\"} to=\"/categories\">Categories</Link>\n-        <Link className={pathname.startsWith(\"/blogs\")?\"active\":\"\"} to=\"/blogs\">Blogs</Link>\n-      </div>\n-      <button onClick={logout}>Logout</button>\n+    <div style={{ background: \"#111\", padding: \"10px 20px\", color: \"#fff\", display: \"flex\", gap: 16, alignItems: \"center\" }}>\n+      <Link to=\"/\" style={linkStyle}>Dashboard</Link>\n+      <Link to=\"/categories\" style={linkStyle}>Categories</Link>\n+      <Link to=\"/blogs\" style={linkStyle}>Blogs</Link>\n+      <Link to=\"/blogs/create\" style={linkStyle}>+ New Blog</Link>\n+      <button onClick={logout} style={{ marginLeft: \"auto\", background: \"#444\", color: \"#fff\", border: \"none\", padding: \"6px 10px\", borderRadius: 6 }}>Logout</button>\n     </div>\n   );\n }\n+\n+const linkStyle = { color: \"#fff\", textDecoration: \"none\" };\n"
+                },
+                {
+                    "date": 1762459686338,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,9 @@\n       <Link to=\"/\" style={linkStyle}>Dashboard</Link>\n       <Link to=\"/categories\" style={linkStyle}>Categories</Link>\n       <Link to=\"/blogs\" style={linkStyle}>Blogs</Link>\n       <Link to=\"/blogs/create\" style={linkStyle}>+ New Blog</Link>\n+      <NavLink to=\"/comments\">Comments</NavLink>\n       <button onClick={logout} style={{ marginLeft: \"auto\", background: \"#444\", color: \"#fff\", border: \"none\", padding: \"6px 10px\", borderRadius: 6 }}>Logout</button>\n     </div>\n   );\n }\n"
+                },
+                {
+                    "date": 1762459692457,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n       <Link to=\"/\" style={linkStyle}>Dashboard</Link>\n       <Link to=\"/categories\" style={linkStyle}>Categories</Link>\n       <Link to=\"/blogs\" style={linkStyle}>Blogs</Link>\n       <Link to=\"/blogs/create\" style={linkStyle}>+ New Blog</Link>\n-      <NavLink to=\"/comments\">Comments</NavLink>\n+      <Link to=\"/comments\">Comments</Link>\n       <button onClick={logout} style={{ marginLeft: \"auto\", background: \"#444\", color: \"#fff\", border: \"none\", padding: \"6px 10px\", borderRadius: 6 }}>Logout</button>\n     </div>\n   );\n }\n"
+                }
+            ],
+            "date": 1762268888596,
+            "name": "Commit-0",
+            "content": "import { Link, useLocation } from \"react-router-dom\";\nimport { useAuth } from \"../auth/AuthContext\";\n\nexport default function Topbar() {\n  const { logout } = useAuth();\n  const { pathname } = useLocation();\n  return (\n    <div className=\"topbar\">\n      <div className=\"left\">\n        <Link to=\"/\">Dashboard</Link>\n        <Link className={pathname.startsWith(\"/categories\")?\"active\":\"\"} to=\"/categories\">Categories</Link>\n        <Link className={pathname.startsWith(\"/blogs\")?\"active\":\"\"} to=\"/blogs\">Blogs</Link>\n      </div>\n      <button onClick={logout}>Logout</button>\n    </div>\n  );\n}\n"
+        }
+    ]
+}

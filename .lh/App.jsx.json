@@ -1,0 +1,22 @@
+{
+    "sourceFile": "App.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1762268848596,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1762269068524,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,27 +0,0 @@\n-import { BrowserRouter, Routes, Route } from \"react-router-dom\";\n-import { AuthProvider } from \"./auth/AuthContext\";\n-import ProtectedRoute from \"./auth/ProtectedRoute\";\n-\n-import Login from \"./pages/Login\";\n-import Dashboard from \"./pages/Dashboard\";\n-import Categories from \"./pages/Categories\";\n-import Blogs from \"./pages/Blogs\";\n-import BlogCreate from \"./pages/BlogCreate\";\n-import BlogEdit from \"./pages/BlogEdit\";\n-\n-export default function App() {\n-  return (\n-    <AuthProvider>\n-      <BrowserRouter>\n-        <Routes>\n-          <Route path=\"/login\" element={<Login />} />\n-          <Route path=\"/\" element={<ProtectedRoute><Dashboard/></ProtectedRoute>} />\n-          <Route path=\"/categories\" element={<ProtectedRoute><Categories/></ProtectedRoute>} />\n-          <Route path=\"/blogs\" element={<ProtectedRoute><Blogs/></ProtectedRoute>} />\n-          <Route path=\"/blogs/create\" element={<ProtectedRoute><BlogCreate/></ProtectedRoute>} />\n-          <Route path=\"/blogs/:id/edit\" element={<ProtectedRoute><BlogEdit/></ProtectedRoute>} />\n-        </Routes>\n-      </BrowserRouter>\n-    </AuthProvider>\n-  );\n-}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1762268848596,
+            "name": "Commit-0",
+            "content": "import { BrowserRouter, Routes, Route } from \"react-router-dom\";\nimport { AuthProvider } from \"./auth/AuthContext\";\nimport ProtectedRoute from \"./auth/ProtectedRoute\";\n\nimport Login from \"./pages/Login\";\nimport Dashboard from \"./pages/Dashboard\";\nimport Categories from \"./pages/Categories\";\nimport Blogs from \"./pages/Blogs\";\nimport BlogCreate from \"./pages/BlogCreate\";\nimport BlogEdit from \"./pages/BlogEdit\";\n\nexport default function App() {\n  return (\n    <AuthProvider>\n      <BrowserRouter>\n        <Routes>\n          <Route path=\"/login\" element={<Login />} />\n          <Route path=\"/\" element={<ProtectedRoute><Dashboard/></ProtectedRoute>} />\n          <Route path=\"/categories\" element={<ProtectedRoute><Categories/></ProtectedRoute>} />\n          <Route path=\"/blogs\" element={<ProtectedRoute><Blogs/></ProtectedRoute>} />\n          <Route path=\"/blogs/create\" element={<ProtectedRoute><BlogCreate/></ProtectedRoute>} />\n          <Route path=\"/blogs/:id/edit\" element={<ProtectedRoute><BlogEdit/></ProtectedRoute>} />\n        </Routes>\n      </BrowserRouter>\n    </AuthProvider>\n  );\n}\n"
+        }
+    ]
+}

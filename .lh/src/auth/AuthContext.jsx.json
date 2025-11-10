@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/auth/AuthContext.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1762268833941,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1762269599354,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,16 +1,22 @@\n import { createContext, useContext, useEffect, useState } from \"react\";\n-import { api } from \"../api/client\";\n+import axios from \"axios\";\n \n const AuthCtx = createContext(null);\n \n export function AuthProvider({ children }) {\n   const [user, setUser] = useState(null);\n   const [ready, setReady] = useState(false);\n \n+  const api = axios.create({ baseURL: import.meta.env.VITE_API_BASE });\n+\n   useEffect(() => {\n     const token = localStorage.getItem(\"admin_token\");\n-    if (!token) return setReady(true);\n+    if (!token) { setReady(true); return; }\n+    api.interceptors.request.use(cfg => {\n+      cfg.headers.Authorization = `Bearer ${token}`;\n+      return cfg;\n+    });\n     api.get(\"/api/auth/me\")\n       .then(({ data }) => setUser(data))\n       .catch(() => {\n         localStorage.removeItem(\"admin_token\");\n@@ -23,14 +29,20 @@\n     localStorage.setItem(\"admin_token\", token);\n     localStorage.setItem(\"admin_username\", admin?.username || \"\");\n     setUser(admin);\n   }\n+\n   function logout() {\n     localStorage.removeItem(\"admin_token\");\n     localStorage.removeItem(\"admin_username\");\n     setUser(null);\n     window.location.href = \"/login\";\n   }\n \n-  return <AuthCtx.Provider value={{ user, ready, loginSuccess, logout }}>{children}</AuthCtx.Provider>;\n+  return (\n+    <AuthCtx.Provider value={{ user, ready, loginSuccess, logout }}>\n+      {children}\n+    </AuthCtx.Provider>\n+  );\n }\n+\n export const useAuth = () => useContext(AuthCtx);\n"
+                }
+            ],
+            "date": 1762268833941,
+            "name": "Commit-0",
+            "content": "import { createContext, useContext, useEffect, useState } from \"react\";\nimport { api } from \"../api/client\";\n\nconst AuthCtx = createContext(null);\n\nexport function AuthProvider({ children }) {\n  const [user, setUser] = useState(null);\n  const [ready, setReady] = useState(false);\n\n  useEffect(() => {\n    const token = localStorage.getItem(\"admin_token\");\n    if (!token) return setReady(true);\n    api.get(\"/api/auth/me\")\n      .then(({ data }) => setUser(data))\n      .catch(() => {\n        localStorage.removeItem(\"admin_token\");\n        localStorage.removeItem(\"admin_username\");\n      })\n      .finally(() => setReady(true));\n  }, []);\n\n  function loginSuccess({ token, admin }) {\n    localStorage.setItem(\"admin_token\", token);\n    localStorage.setItem(\"admin_username\", admin?.username || \"\");\n    setUser(admin);\n  }\n  function logout() {\n    localStorage.removeItem(\"admin_token\");\n    localStorage.removeItem(\"admin_username\");\n    setUser(null);\n    window.location.href = \"/login\";\n  }\n\n  return <AuthCtx.Provider value={{ user, ready, loginSuccess, logout }}>{children}</AuthCtx.Provider>;\n}\nexport const useAuth = () => useContext(AuthCtx);\n"
+        }
+    ]
+}
