@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useMemo } from "react";
+import { useEffect, useRef, useState } from "react";
 import { api } from "../api/client";
 import { adminFetch } from "../api/adminFetch";
 import ReactQuill from "react-quill";
@@ -25,42 +25,7 @@ export default function BlogCreate() {
   }, []);
 
   const quillRef = useRef(null);
-  // const modules = {
-  //   toolbar: {
-  //     container: [
-  //       [{ header: [1, 2, 3, false] }],
-  //       ["bold", "italic", "underline"],
-  //       [{ list: "ordered" }, { list: "bullet" }],
-  //       ["link", "image"],
-  //       ["clean"]
-  //     ],
-  //     handlers: {
-  //       image: async function () {
-  //         const input = document.createElement("input");
-  //         input.type = "file"; input.accept = "image/*";
-  //         input.onchange = async () => {
-  //           const f = input.files?.[0]; if (!f) return;
-  //           const form = new FormData();
-  //           form.append("image", f);
-  //           const token = localStorage.getItem("admin_token");
-  //           const res = await fetch(`${import.meta.env.VITE_API_BASE}/api/uploads/image`, {
-  //             method: "POST",
-  //             headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-  //             body: form
-  //           });
-  //           const { url } = await res.json();
-  //           const editor = quillRef.current.getEditor();
-  //           const range = editor.getSelection(true);
-  //           editor.insertEmbed(range.index, "image", url);
-  //         };
-  //         input.click();
-  //       }
-  //     }
-  //   }
-  // };
-
-
-  const modules = useMemo(() => ({
+  const modules = {
     toolbar: {
       container: [
         [{ header: [1, 2, 3, false] }],
@@ -72,38 +37,27 @@ export default function BlogCreate() {
       handlers: {
         image: async function () {
           const input = document.createElement("input");
-          input.type = "file"; 
-          input.accept = "image/*";
-  
+          input.type = "file"; input.accept = "image/*";
           input.onchange = async () => {
-            const f = input.files?.[0];
-            if (!f) return;
-  
+            const f = input.files?.[0]; if (!f) return;
             const form = new FormData();
             form.append("image", f);
-  
             const token = localStorage.getItem("admin_token");
-            const res = await fetch(
-              `${import.meta.env.VITE_API_BASE}/api/uploads/image`,
-              {
-                method: "POST",
-                headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-                body: form,
-              }
-            );
-  
+            const res = await fetch(`${import.meta.env.VITE_API_BASE}/api/uploads/image`, {
+              method: "POST",
+              headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+              body: form
+            });
             const { url } = await res.json();
             const editor = quillRef.current.getEditor();
             const range = editor.getSelection(true);
             editor.insertEmbed(range.index, "image", url);
           };
-  
           input.click();
         }
       }
     }
-  }), []); // VERY IMPORTANT
-  
+  };
 
   async function submit(e) {
     e.preventDefault();
@@ -154,11 +108,11 @@ export default function BlogCreate() {
           <ReactQuill ref={quillRef} value={contentHtml} onChange={setContent} modules={modules} />
 
           <label className="field-label">Homepage Section</label>
-          <select
+{/* <select
   value={sections[0] || ""}
-  onChange={(e) => setSections([e.target.value])}
->
-
+  onChange={(e) => setSections(e.target.value ? [e.target.value] : [])}
+  className="tf-input"
+> */}
   <option value="">Choose homepage section</option>
   <option value="top_new">Top New</option>
   <option value="most_popular">Most Popular</option>

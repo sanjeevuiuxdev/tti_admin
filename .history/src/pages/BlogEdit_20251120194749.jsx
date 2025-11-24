@@ -88,55 +88,6 @@ export default function BlogEdit() {
   //   },
   // };
 
-
-  const modules = useMemo(
-    () => ({
-      toolbar: {
-        container: [
-          [{ header: [1, 2, 3, false] }],
-          ["bold", "italic", "underline"],
-          [{ list: "ordered" }, { list: "bullet" }],
-          ["link", "image"],
-          ["clean"],
-        ],
-        handlers: {
-          image: async function () {
-            const input = document.createElement("input");
-            input.type = "file";
-            input.accept = "image/*";
-  
-            input.onchange = async () => {
-              const f = input.files?.[0];
-              if (!f) return;
-  
-              const form = new FormData();
-              form.append("image", f);
-  
-              const token = localStorage.getItem("admin_token");
-              const res = await fetch(
-                `${import.meta.env.VITE_API_BASE}/api/uploads/image`,
-                {
-                  method: "POST",
-                  headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-                  body: form,
-                }
-              );
-  
-              const { url } = await res.json();
-              const editor = quillRef.current.getEditor();
-              const range = editor.getSelection(true);
-              editor.insertEmbed(range.index, "image", url);
-            };
-  
-            input.click();
-          },
-        },
-      },
-    }),
-    []
-  );
-  
-
   if (!blog) {
     return (
       <>
@@ -220,17 +171,17 @@ export default function BlogEdit() {
           {/* Single dropdown, same as Create (includes Banner) */}
           <label className="field-label">Homepage Section</label>
           <select
-  value={sections[0] || ""}
-  onChange={(e) => setSections([e.target.value])}
-  className="tf-input"
->
-  <option value="">Choose homepage section</option>
-  {SECTION_OPTIONS.map((opt) => (
-    <option key={opt.value} value={opt.value}>
-      {opt.label}
-    </option>
-  ))}
-</select>
+            value={sections[0] || ""}
+            onChange={(e) => setSections(e.target.value ? [e.target.value] : [])}
+            className="tf-input"
+          >
+            <option value="">Choose homepage section</option>
+            {SECTION_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
           <small className="text-body-2">
             Matches Create page behavior (single selection).
           </small>

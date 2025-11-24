@@ -155,7 +155,7 @@ export default function BlogCreate() {
 
           <label className="field-label">Homepage Section</label>
           <select
-  value={sections[0] || ""}
+  value={sections}
   onChange={(e) => setSections([e.target.value])}
 >
 

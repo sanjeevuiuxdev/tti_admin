@@ -220,17 +220,17 @@ export default function BlogEdit() {
           {/* Single dropdown, same as Create (includes Banner) */}
           <label className="field-label">Homepage Section</label>
           <select
-  value={sections[0] || ""}
-  onChange={(e) => setSections([e.target.value])}
-  className="tf-input"
->
-  <option value="">Choose homepage section</option>
-  {SECTION_OPTIONS.map((opt) => (
-    <option key={opt.value} value={opt.value}>
-      {opt.label}
-    </option>
-  ))}
-</select>
+            value={sections[0] || ""}
+            onChange={(e) => setSections(e.target.value ? [e.target.value] : [])}
+            className="tf-input"
+          >
+            <option value="">Choose homepage section</option>
+            {SECTION_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
           <small className="text-body-2">
             Matches Create page behavior (single selection).
           </small>

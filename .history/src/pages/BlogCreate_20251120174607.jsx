@@ -59,52 +59,6 @@ export default function BlogCreate() {
   //   }
   // };
 
-
-  const modules = useMemo(() => ({
-    toolbar: {
-      container: [
-        [{ header: [1, 2, 3, false] }],
-        ["bold", "italic", "underline"],
-        [{ list: "ordered" }, { list: "bullet" }],
-        ["link", "image"],
-        ["clean"]
-      ],
-      handlers: {
-        image: async function () {
-          const input = document.createElement("input");
-          input.type = "file"; 
-          input.accept = "image/*";
-  
-          input.onchange = async () => {
-            const f = input.files?.[0];
-            if (!f) return;
-  
-            const form = new FormData();
-            form.append("image", f);
-  
-            const token = localStorage.getItem("admin_token");
-            const res = await fetch(
-              `${import.meta.env.VITE_API_BASE}/api/uploads/image`,
-              {
-                method: "POST",
-                headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-                body: form,
-              }
-            );
-  
-            const { url } = await res.json();
-            const editor = quillRef.current.getEditor();
-            const range = editor.getSelection(true);
-            editor.insertEmbed(range.index, "image", url);
-          };
-  
-          input.click();
-        }
-      }
-    }
-  }), []); // VERY IMPORTANT
-  
-
   async function submit(e) {
     e.preventDefault();
 
@@ -155,7 +109,7 @@ export default function BlogCreate() {
 
           <label className="field-label">Homepage Section</label>
           <select
-  value={sections[0] || ""}
+  value={sections}
   onChange={(e) => setSections([e.target.value])}
 >
 

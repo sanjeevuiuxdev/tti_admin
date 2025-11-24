@@ -231,6 +231,13 @@ export default function BlogEdit() {
     </option>
   ))}
 </select>
+            <option value="">Choose homepage section</option>
+            {SECTION_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
           <small className="text-body-2">
             Matches Create page behavior (single selection).
           </small>
